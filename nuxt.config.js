@@ -51,6 +51,7 @@ export default {
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
+    transpile: /@fullcalendar.*/, // ref: https://github.com/fullcalendar/fullcalendar-example-projects/blob/master/nuxt/nuxt.config.js
     babel: {
       plugins: [['@babel/plugin-proposal-private-methods', { loose: true }]],
     },
