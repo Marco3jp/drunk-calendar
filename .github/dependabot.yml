@@ -4,13 +4,12 @@ updates:
 - package-ecosystem: npm
   directory: '/'
   schedule:
-    interval: daily
-    time: '00:00'
+    interval: monthly
   open-pull-requests-limit: 10
   reviewers:
-    - marco
+    - Marco3jp
   assignees:
-    - marco
+    - Marco3jp
   commit-message:
     prefix: fix
     prefix-development: chore
