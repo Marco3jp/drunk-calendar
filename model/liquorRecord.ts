@@ -1,8 +1,6 @@
 import {Liquor} from "~/model/liquor";
+import {BaseRecord} from "~/model/baseRecord";
 
-export interface LiquorRecord {
-  "id": string // uuid
-  "date": number // unix time = Math.round(Date.now() / 1000)
+export interface LiquorRecord extends BaseRecord{
   "liquor": Liquor
-  "memo"?: string
 }

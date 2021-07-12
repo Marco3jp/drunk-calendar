@@ -1,9 +1,14 @@
+import {LiquorSource} from "~/model/liquorSource";
+import {notLiquid} from "~/model/notLiquid";
+import {alcoholByVolume, liquidQuantityMilliLitter} from "~/model/baseType";
+
 export interface Liquor {
+  "id"?: string // uuid
   "name"?: string
-  "baseAlcohol": Array<{
-    "percent"?: number // 自分で割ったときのベースアルコール度数
-    "milliliter"?: number // 自分で割ったときのベースアルコール量
-  }>
-  "totalDrinkMilliliter"?: number // 自分で割ったりしたときの総量
-  "ethanolMilliliter": number // エタノールの量（混ぜた際の化学反応等は考慮しない）
+  "quantity"?: liquidQuantityMilliLitter
+  "sources"?: Array<LiquorSource | notLiquid>
+  "alcohol"?: {
+    "rate": alcoholByVolume
+    "quantity": liquidQuantityMilliLitter
+  }
 }

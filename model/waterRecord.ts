@@ -1,8 +1,8 @@
-export interface WaterRecord {
-  "id": string // uuid
-  "date": number // unix time = Math.round(Date.now() / 1000)
-  "water": {
-    "totalDrinkMilliliter": number
+import {BaseRecord} from "~/model/baseRecord";
+import {liquidQuantityMilliLitter} from "~/model/baseType";
+
+export interface WaterRecord extends BaseRecord{
+  "water"?: {
+    "quantity": liquidQuantityMilliLitter
   }
-  "memo"?: string
 }
