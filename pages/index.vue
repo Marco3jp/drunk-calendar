@@ -31,8 +31,18 @@ export default defineComponent({
   width: 100%;
   display: flex;
 
-  #today-drunk-column, #drunk-calendar-column {
-    width: 50%;
+  @media (min-aspect-ratio: 1/1) {
+    #today-drunk-column, #drunk-calendar-column {
+      width: 50%;
+    }
+  }
+
+  @media (max-aspect-ratio: 1/1) {
+    flex-direction: column;
+
+    #today-drunk-column, #drunk-calendar-column {
+      width: 100%;
+    }
   }
 }
 </style>
