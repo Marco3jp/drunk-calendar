@@ -11,4 +11,5 @@ export interface Liquor {
     "rate": alcoholByVolume
     "quantity": liquidQuantityMilliLitter
   }
+  "memo"?: string
 }
