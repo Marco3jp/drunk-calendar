@@ -54,7 +54,12 @@ export default {
   build: {
     transpile: /@fullcalendar.*/, // ref: https://github.com/fullcalendar/fullcalendar-example-projects/blob/master/nuxt/nuxt.config.js
     babel: {
-      plugins: [['@babel/plugin-proposal-private-methods', { loose: true }]],
+      plugins: [
+        ['@babel/plugin-proposal-private-methods', { loose: true }],
+        // https://github.com/nuxt/nuxt.js/pull/9631 was not released, temporary response
+        // ref: https://github.com/nuxt/nuxt.js/issues/9224
+        ['@babel/plugin-proposal-private-property-in-object', { loose: true }]
+      ],
     },
   }
 }
