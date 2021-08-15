@@ -1,3 +1,6 @@
+/**
+ * @description The total amount of liquid expressed in milliliters
+ */
 export type liquidQuantityMilliLitter = number
 
 /**
