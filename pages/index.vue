@@ -3,11 +3,8 @@
     <AppHeader />
     <main id="app-main-area">
       <div id="today-drunk-column">
-        <TodayDrunkForm />
+        <TodayDrunkQuickForm @record-drunk="recordDrunk" />
         <TodayDrunkInformation />
-      </div>
-      <div id="drunk-calendar-column">
-        <DrunkCalendarArea />
       </div>
     </main>
   </div>
@@ -17,12 +14,18 @@
 import {defineComponent} from '@nuxtjs/composition-api'
 
 import AppHeader from "~/components/organisms/AppHeader.vue";
-import TodayDrunkForm from "~/components/organisms/TodayDrunkForm.vue";
 import TodayDrunkInformation from "~/components/organisms/TodayDrunkInformation.vue";
 import DrunkCalendarArea from "~/components/organisms/DrunkCalendarArea.vue";
+import TodayDrunkQuickForm from "~/components/organisms/TodayDrunkQuickForm.vue";
+import {Liquor} from "~/model/liquor";
 
 export default defineComponent({
-  components: {AppHeader, TodayDrunkForm, TodayDrunkInformation, DrunkCalendarArea},
+  components: {TodayDrunkQuickForm, AppHeader, TodayDrunkInformation, DrunkCalendarArea},
+  methods: {
+    recordDrunk(drunkLiquor: Liquor) {
+      // TODO: Storeに入れるやつ書いて
+    }
+  }
 })
 </script>
 
