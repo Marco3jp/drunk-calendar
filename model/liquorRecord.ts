@@ -3,4 +3,5 @@ import {BaseRecord} from "~/model/baseRecord";
 
 export interface LiquorRecord extends BaseRecord{
   "liquor": Liquor
+  "type": "liquor"
 }

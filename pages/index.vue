@@ -23,7 +23,7 @@ export default defineComponent({
   components: {TodayDrunkQuickForm, AppHeader, TodayDrunkInformation, DrunkCalendarArea},
   methods: {
     recordDrunk(drunkLiquor: Liquor) {
-      // TODO: Storeに入れるやつ書いて
+      this.$store.dispatch('records/recordLiquor', drunkLiquor)
     }
   }
 })

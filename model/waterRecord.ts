@@ -5,4 +5,5 @@ export interface WaterRecord extends BaseRecord{
   "water"?: {
     "quantity": liquidQuantityMilliLitter
   }
+  "type": "water"
 }
