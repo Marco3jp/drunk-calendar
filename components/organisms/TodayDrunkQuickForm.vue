@@ -4,7 +4,7 @@
       <div class="basic-form__alcohol-rate">
         <label>
           <span>酒の度数(%)</span>
-          <input type="number" v-model="localLiquor.alcohol.rate"
+          <input type="number" min="0" max="100" v-model="localLiquor.alcohol.rate"
                  @input="calculateAlcoholQuantity">
         </label>
         <p> {{ alcoholRateErrorMessage }} </p>
