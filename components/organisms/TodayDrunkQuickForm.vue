@@ -95,7 +95,7 @@ export default defineComponent({
         quantity: parseInt(this.localLiquor.quantity),
         alcohol: {
           rate: parseFloat(this.localLiquor.alcohol.rate),
-          quantity: parseInt(this.localLiquor.alcohol.quantity)
+          quantity: parseFloat(this.localLiquor.alcohol.quantity)
         }
       } as Liquor)
 
