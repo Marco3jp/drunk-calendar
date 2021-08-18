@@ -41,6 +41,7 @@ export default {
   modules: [
     // https://go.nuxtjs.dev/pwa
     '@nuxtjs/pwa',
+    '@nuxtjs/dayjs'
   ],
 
   // PWA module configuration: https://go.nuxtjs.dev/pwa
