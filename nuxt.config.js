@@ -1,3 +1,9 @@
+const routerBase = process.env.DEPLOY_ENV === 'GH_PAGES' ? {
+  router: {
+    base: '/drunk-calendar/'
+  }
+} : {}
+
 export default {
   // Disable server-side rendering: https://go.nuxtjs.dev/ssr-mode
   ssr: false,
@@ -53,7 +59,7 @@ export default {
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
-    transpile: /@fullcalendar.*/, // ref: https://github.com/fullcalendar/fullcalendar-example-projects/blob/master/nuxt/nuxt.config.js
+    transpile: [/@fullcalendar.*/], // ref: https://github.com/fullcalendar/fullcalendar-example-projects/blob/master/nuxt/nuxt.config.js
     babel: {
       plugins: [
         ['@babel/plugin-proposal-private-methods', { loose: true }],
@@ -62,5 +68,6 @@ export default {
         ['@babel/plugin-proposal-private-property-in-object', { loose: true }]
       ],
     },
-  }
+  },
+  ...routerBase
 }

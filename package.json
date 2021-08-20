@@ -6,7 +6,8 @@
     "dev": "nuxt",
     "build": "nuxt build",
     "start": "nuxt start",
-    "generate": "nuxt generate"
+    "generate": "nuxt generate",
+    "gh-pages:generate": "DEPLOY_ENV=GH_PAGES nuxt generate"
   },
   "dependencies": {
     "@fullcalendar/daygrid": "^5.9.0",
