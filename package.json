@@ -18,7 +18,7 @@
     "@nuxtjs/dayjs": "^1.4.0",
     "@nuxtjs/pwa": "^3.3.5",
     "nuxt": "^2.15.7",
-    "sass": "^1.37.5",
+    "sass": "^1.49.4",
     "sass-loader": "^10.2.0",
     "uuid": "^8.3.2",
     "vuex-persistedstate": "^4.0.0"
