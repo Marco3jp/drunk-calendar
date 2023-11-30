@@ -1,5 +1,5 @@
-import {Drink} from "~/model/drink";
-import {liquidQuantityMilliLitter} from "~/model/baseType";
+import {Drink} from "./drink.ts";
+import {liquidQuantityMilliLitter} from "./baseType.ts";
 
 export interface LiquorSource {
   drink: Drink

@@ -1,6 +1,6 @@
-import {LiquorSource} from "~/model/liquorSource";
-import {notLiquid} from "~/model/notLiquid";
-import {alcoholByVolume, liquidQuantityMilliLitter} from "~/model/baseType";
+import {alcoholByVolume, liquidQuantityMilliLitter} from "./baseType.ts";
+import {LiquorSource} from "./liquorSource.ts";
+import {notLiquid} from "./notLiquid.ts";
 
 export interface Liquor {
   "id"?: string // uuid

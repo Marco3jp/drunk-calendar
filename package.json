@@ -13,6 +13,7 @@
     "vite": "^5.0.0"
   },
   "dependencies": {
-    "@builder.io/qwik": "^1.2.17"
+    "@builder.io/qwik": "^1.2.17",
+    "vite-tsconfig-paths": "^4.2.1"
   }
 }

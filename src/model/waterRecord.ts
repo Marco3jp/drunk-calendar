@@ -1,5 +1,5 @@
-import {BaseRecord} from "~/model/baseRecord";
-import {liquidQuantityMilliLitter} from "~/model/baseType";
+import {BaseRecord} from "./baseRecord.ts";
+import {liquidQuantityMilliLitter} from "./baseType.ts";
 
 export interface WaterRecord extends BaseRecord{
   "water"?: {

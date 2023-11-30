@@ -1,5 +1,5 @@
-import {Liquor} from "~/model/liquor";
-import {BaseRecord} from "~/model/baseRecord";
+import {BaseRecord} from "./baseRecord.ts";
+import {Liquor} from "./liquor.ts";
 
 export interface LiquorRecord extends BaseRecord{
   "liquor": Liquor
