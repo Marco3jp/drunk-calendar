@@ -1,4 +1,4 @@
-import {alcoholByVolume} from "~/model/baseType";
+import {alcoholByVolume} from "./baseType.ts";
 
 export type Drink = SoftDrink | HardDrink
 

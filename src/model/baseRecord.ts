@@ -1,4 +1,4 @@
-import {DrunkLocation} from "~/model/drunkLocation";
+import {DrunkLocation} from "./drunkLocation.ts";
 
 export interface BaseRecord {
   "id": string // uuid
