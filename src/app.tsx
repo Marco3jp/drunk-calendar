@@ -8,18 +8,19 @@ export const App = component$(() => {
 
   return (
     <>
-      <div>
-        <a href="https://qwik.builder.io" target="_blank">
-          <img src={qwikLogo} class="logo qwik" alt="Qwik logo" />
-        </a>
-      </div>
-      <h1>Vite + Qwik</h1>
-      <div class="card">
-        <button onClick$={() => count.value++}>count is {count.value}</button>
-      </div>
-      <p class="read-the-docs">
-        Click on Qwik logo to learn more
-      </p>
+        <main class="flex">
+            <section>
+
+            </section>
+            <div>
+                <section>
+
+                </section>
+                <section>
+
+                </section>
+            </div>
+        </main>
     </>
   )
 })
