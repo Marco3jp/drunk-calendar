@@ -1,9 +1,15 @@
 import {useStore, $, QRL} from "@builder.io/qwik";
 import {Record} from "../../model/record.ts";
 
+type Query = {
+    from?: number
+    to?: number
+}
+
 export interface DrunkStore {
     records: Record[]
     pushRecords: QRL<(records: Record[]) => Record[]>
+    queryRecords: QRL<(query: Query) => Record[]>
 }
 
 /**
@@ -19,6 +25,20 @@ export function useDrunkStore(): DrunkStore {
             this.records.push(...records)
             localStorage.setItem("drunk-records", JSON.stringify(this.records))
             return this.records
+        }),
+        queryRecords: $(function (this: DrunkStore, query: Query) {
+            const {from, to} = query
+            const records = this.records
+
+            if (from && to) {
+                return records.filter(r => r.date >= from && r.date <= to)
+            } else if (from) {
+                return records.filter(r => r.date >= from)
+            } else if (to) {
+                return records.filter(r => r.date <= to)
+            }
+
+            return []
         })
     });
 }
