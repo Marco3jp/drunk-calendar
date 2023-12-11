@@ -1,9 +1,23 @@
-import {component$} from '@builder.io/qwik'
+import {$, component$} from '@builder.io/qwik'
 
 import './app.css'
-import {DrunkRecordForm} from "./component/form/drunkRecordForm.tsx";
+import {DrunkRecordForm, drunkRecordFormValues} from "./component/form/drunkRecordForm.tsx";
+import {useDrunkStore} from "./lib/state/records.ts";
 
 export const App = component$(() => {
+    const store = useDrunkStore()
+    const onSubmitRecord$ = $((values: drunkRecordFormValues) => {
+        store.pushRecords([{
+            id: crypto.randomUUID(),
+            date: Math.round(Date.now() / 1000),
+            item: {
+                name: values.name,
+                volumeMilliliter: values.volumeMilliliter,
+                alcoholByVolume: values.alcoholByVolume
+            }
+        }])
+    })
+
     return (
         <>
             <main class="flex w-full h-full">
@@ -31,7 +45,7 @@ export const App = component$(() => {
                     </section>
                     <section class="w-full px-2 pt-1 pb-4 flex-1 flex flex-col">
                         { /* <label class="self-end"><input type="checkbox" class="mr-1"/>割る前の酒から計算する</label> */}
-                        <DrunkRecordForm />
+                        <DrunkRecordForm onSubmitRecord$={onSubmitRecord$} />
                     </section>
                 </section>
             </main>
