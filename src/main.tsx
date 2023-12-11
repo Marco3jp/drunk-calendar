@@ -1,7 +1,38 @@
-import '@builder.io/qwik/qwikloader.js'
+import {
+    createBrowserRouter,
+    RouterProvider,
+} from "react-router-dom";
 
-import { render } from '@builder.io/qwik'
-import { App } from './app.tsx'
-import './index.css'
+import MainLayout from "./layout/main";
+import Index from "./pages/index";
+import Calendar from "./pages/calendar";
 
-render(document.getElementById('app') as HTMLElement, <App />)
+import "./main.css"
+import {createRoot} from "react-dom/client";
+import {StrictMode} from "react";
+
+const router = createBrowserRouter([
+    {
+        element: <MainLayout />,
+        children: [
+            {
+                path: "/",
+                element: <Index />,
+            },
+            {
+                path: "/calendar",
+                element: <Calendar />,
+            }
+        ],
+    },
+]);
+
+const root = document.querySelector("#root")
+
+if (root) {
+    createRoot(root).render(
+        <StrictMode>
+            <RouterProvider router={router} />
+        </StrictMode>
+    );
+}

@@ -1,5 +1,5 @@
-import {$, component$, useStore} from "@builder.io/qwik";
 import {useNumberValue} from "../../lib/numberInput.ts";
+import {useState} from "react";
 
 export type drunkRecordFormValues = {name?: string, volumeMilliliter: number, alcoholByVolume: number}
 
@@ -8,6 +8,7 @@ type drunkTemplateType = {
     volume: number,
     alcohol: number,
 }
+
 const drunkTemplates: drunkTemplateType[] = [
     {
         name: 'ビール',
@@ -37,47 +38,44 @@ const drunkTemplates: drunkTemplateType[] = [
 ]
 
 type DrunkRecordFormProps = {
-    onSubmitRecord$?: (values: drunkRecordFormValues) => void
+    onSubmitRecord?: (values: drunkRecordFormValues) => void
 }
 
-export const DrunkRecordForm = component$<DrunkRecordFormProps>(({onSubmitRecord$}) => {
+export const DrunkRecordForm = (({onSubmitRecord}: DrunkRecordFormProps) => {
     const initialStates: drunkRecordFormValues = {
         name: "",
         volumeMilliliter: 0,
         alcoholByVolume: 0,
     }
 
-    const states: drunkRecordFormValues & { reset: () => void } = useStore({
+    const [drunkRecord, setDrunkRecord] = useState({
         ...initialStates,
-        reset: $(function (this: drunkRecordFormValues) {
-            this.name = initialStates.name
-            this.volumeMilliliter = initialStates.volumeMilliliter
-            this.alcoholByVolume = initialStates.alcoholByVolume
+    })
+
+    function resetStates(){
+        setDrunkRecord(initialStates)
+    }
+
+    function onSubmit() {
+        if (drunkRecord.volumeMilliliter === 0 || !onSubmitRecord) return
+
+        onSubmitRecord(drunkRecord)
+
+        resetStates()
+    }
+
+    function onSelectDrunkTemplate(template: drunkTemplateType) {
+        setDrunkRecord({
+            name: template.name,
+            volumeMilliliter: template.volume,
+            alcoholByVolume: template.alcohol
         })
-    })
-
-    const onSubmit = $(() => {
-        if (states.volumeMilliliter === 0 || !onSubmitRecord$) return
-
-        onSubmitRecord$({
-            name: states.name,
-            volumeMilliliter: states.volumeMilliliter,
-            alcoholByVolume: states.alcoholByVolume,
-        })
-
-        states.reset()
-    })
-
-    const onSelectDrunkTemplate = $((template: drunkTemplateType) => {
-        states.name = template.name
-        states.volumeMilliliter = template.volume
-        states.alcoholByVolume = template.alcohol
-    })
+    }
 
     const drunkTemplatesElement = drunkTemplates.map((template) => {
-        return <li class="border rounded border-gray-500 p-2 flex flex-col text-center shrink-0"
+        return <li className="border rounded border-gray-500 p-2 flex flex-col text-center shrink-0"
                    key={template.name}
-                   onClick$={() => {
+                   onClick={() => {
                        onSelectDrunkTemplate(template)
                    }}
         >
@@ -88,54 +86,54 @@ export const DrunkRecordForm = component$<DrunkRecordFormProps>(({onSubmitRecord
     })
 
     return (
-        <form class="w-full mt-12 flex-1 flex flex-col">
+        <form className="w-full mt-12 flex-1 flex flex-col">
             <section>
                 <div>
-                    <label class="flex flex-col">
+                    <label className="flex flex-col">
                         <div>お酒の量</div>
-                        <div class="self-end w-56">
+                        <div className="self-end w-56">
                             <input type="number" autoFocus
-                                   class="w-40 text-4xl border text-right"
-                                   value={states.volumeMilliliter}
-                                   onInput$={async (event) => {states.volumeMilliliter =  await useNumberValue(event)}}
+                                   className="w-40 text-4xl border text-right"
+                                   value={drunkRecord.volumeMilliliter}
+                                   onInput={(event) => {setDrunkRecord({...drunkRecord, volumeMilliliter: useNumberValue(event)})}}
                                    step="10"
                             /><span
-                            class="text-xl ml-2">ml</span>
+                            className="text-xl ml-2">ml</span>
                         </div>
                     </label>
                 </div>
-                <div class="mt-2">
-                    <label class="flex flex-col">
+                <div className="mt-2">
+                    <label className="flex flex-col">
                         <div>度数</div>
-                        <div class="self-end w-56">
-                            <input type="number" class="w-40 text-4xl border text-right"
-                                   max="100" value={states.alcoholByVolume}
-                                   onInput$={async (event) => {states.alcoholByVolume = await useNumberValue(event)}}/><span class="text-xl ml-2">%</span>
+                        <div className="self-end w-56">
+                            <input type="number" className="w-40 text-4xl border text-right"
+                                   max="100" value={drunkRecord.alcoholByVolume}
+                                   onInput={(event) => {setDrunkRecord({...drunkRecord, alcoholByVolume: useNumberValue(event)})}}/><span className="text-xl ml-2">%</span>
                         </div>
                     </label>
                 </div>
-                <hr class="mx-4 my-4 border-gray-500"/>
+                <hr className="mx-4 my-4 border-gray-500"/>
                 <div>
-                    <div class="flex flex-col">
+                    <div className="flex flex-col">
                         <div>純アルコール量</div>
-                        <div class="self-end w-56">
-                            <span class="inline-block w-40 text-right underline decoration-gray-300 text-2xl">{states.volumeMilliliter * states.alcoholByVolume / 100}</span>
-                            <span class="text-xl ml-2">ml</span>
+                        <div className="self-end w-56">
+                            <span className="inline-block w-40 text-right underline decoration-gray-300 text-2xl">{drunkRecord.volumeMilliliter * drunkRecord.alcoholByVolume / 100}</span>
+                            <span className="text-xl ml-2">ml</span>
                         </div>
                     </div>
                 </div>
             </section>
-            <div class="mt-6 -mx-2 grow">
-                <ul class="flex px-2 overflow-auto space-x-2 text-sm">
+            <div className="mt-6 -mx-2 grow">
+                <ul className="flex px-2 overflow-auto space-x-2 text-sm">
                     {drunkTemplatesElement}
                 </ul>
             </div>
-            <div class="flex justify-around items-end">
-                <input type="button" value="リセット" class="border border-gray-500 p-0.5" onClick$={() => states.reset()} />
+            <div className="flex justify-around items-end">
+                <input type="button" value="リセット" className="border border-gray-500 p-0.5" onClick={resetStates} />
                 {/* <input type="button" value="メモを追加"
-                       class="border rounded border-gray-500 text-lg py-2 px-1 self-stretch"/> */}
+                       className="border rounded border-gray-500 text-lg py-2 px-1 self-stretch"/> */}
                 <input type="button" value="記録"
-                       class="border rounded border-gray-500 text-2xl py-2 px-1 self-stretch" onClick$={onSubmit}/>
+                       className="border rounded border-gray-500 text-2xl py-2 px-1 self-stretch" onClick={onSubmit}/>
             </div>
         </form>
     )

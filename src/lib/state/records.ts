@@ -1,5 +1,5 @@
-import {useStore, $, QRL} from "@builder.io/qwik";
 import {Record} from "../../model/record.ts";
+import {Dispatch, SetStateAction, useState} from "react";
 
 type Query = {
     from?: number
@@ -7,9 +7,9 @@ type Query = {
 }
 
 export interface DrunkStore {
-    records: Record[]
-    pushRecords: QRL<(records: Record[]) => Record[]>
-    queryRecords: QRL<(query: Query) => Record[]>
+    readonly records: Record[]
+    pushRecords: (records: Record[]) => readonly Record[]
+    queryRecords: (query: Query) => readonly Record[]
 }
 
 /**
@@ -17,28 +17,36 @@ export interface DrunkStore {
  * 過去全ての記録を返す
  */
 export function useDrunkStore(): DrunkStore {
-    const drunkRecordsFromLocalStorage = localStorage.getItem("drunk-records")
+    class DrunkStore {
+        private readonly setRecords: Dispatch<SetStateAction<Record[]>>
+        readonly records: Record[]
 
-    return useStore<DrunkStore>({
-        records: drunkRecordsFromLocalStorage ? JSON.parse(drunkRecordsFromLocalStorage) : [],
-        pushRecords: $(function (this: DrunkStore, records: Record[]) {
-            this.records.push(...records)
+        constructor() {
+            const drunkRecordsFromLocalStorage = localStorage.getItem("drunk-records")
+            const records: Record[] = drunkRecordsFromLocalStorage ? JSON.parse(drunkRecordsFromLocalStorage) : []
+            const [r, setR] = useState(records)
+            this.records = r
+            this.setRecords = setR
+        }
+        pushRecords(records: Record[]): readonly Record[] {
+            this.setRecords([...this.records, ...records])
             localStorage.setItem("drunk-records", JSON.stringify(this.records))
             return this.records
-        }),
-        queryRecords: $(function (this: DrunkStore, query: Query) {
+        }
+        queryRecords(query: Query): readonly Record[] {
             const {from, to} = query
-            const records = this.records
 
             if (from && to) {
-                return records.filter(r => r.date >= from && r.date <= to)
+                return this.records.filter((r: { date: number; }) => r.date >= from && r.date <= to)
             } else if (from) {
-                return records.filter(r => r.date >= from)
+                return this.records.filter((r: { date: number; }) => r.date >= from)
             } else if (to) {
-                return records.filter(r => r.date <= to)
+                return this.records.filter((r: { date: number; }) => r.date <= to)
             }
 
             return []
-        })
-    });
+        }
+    }
+
+    return new DrunkStore()
 }
