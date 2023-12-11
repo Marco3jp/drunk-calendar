@@ -30,10 +30,10 @@ export default () => {
             </section>
             <section className="h-full flex-1 overflow-x-hidden flex flex-col">
                 <section className="flex border-b border-gray-500 divide-x divide-inherit">
-                    <Link className="text-center py-4 flex-1" to="/">
+                    <Link className="text-center text-blue-500 hover:text-blue-700 py-4 flex-1" to="/">
                         記録
                     </Link>
-                    <Link className="text-center py-4 flex-1" to="/calendar">
+                    <Link className="text-center text-blue-500 hover:text-blue-700 py-4 flex-1" to="/calendar">
                         カレンダー
                     </Link>
                     {/* <div className="text-center py-4 flex-1">
