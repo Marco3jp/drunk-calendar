@@ -1,7 +1,7 @@
 /**
- * @description The total amount of liquid expressed in milliliters
+ * @description 液体の体積をミリリットルで示す型
  */
-export type liquidQuantityMilliLitter = number
+export type liquidVolumeMilliLitter = number
 
 /**
  * @description alc/vol (ex: 15 = 15%)

@@ -1,16 +1,12 @@
-import {alcoholByVolume} from "./baseType.ts";
+import {alcoholByVolume, liquidVolumeMilliLitter} from "./baseType.ts";
 
-export type Drink = SoftDrink | HardDrink
+export type Drink = {
+  id?: string
+  name?: string
+  volumeMilliliter?: liquidVolumeMilliLitter
+  alcoholByVolume?: alcoholByVolume
 
-export interface SoftDrink {
-  "id"?: string
-  "type": "soft"
-  "name"?: string
-}
-
-export interface HardDrink {
-  "id"?: string
-  "type": "hard"
-  "name"?: string
-  "rate"?: alcoholByVolume
+  // カクテルなどを表現するために使えるように
+  // ただし無限にネストしてしまうので、あるDrinkの原料が一つ（ex: ビールや日本酒）になる場合は使わない
+  sources?: Drink[]
 }
