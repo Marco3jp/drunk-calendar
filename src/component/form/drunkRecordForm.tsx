@@ -3,7 +3,12 @@ import {useNumberValue} from "../../lib/numberInput.ts";
 
 export type drunkRecordFormValues = {name?: string, volumeMilliliter: number, alcoholByVolume: number}
 
-const drunkTemplates = [
+type drunkTemplateType = {
+    name: string,
+    volume: number,
+    alcohol: number,
+}
+const drunkTemplates: drunkTemplateType[] = [
     {
         name: 'ビール',
         volume: 350,
@@ -36,14 +41,6 @@ type DrunkRecordFormProps = {
 }
 
 export const DrunkRecordForm = component$<DrunkRecordFormProps>(({onSubmitRecord$}) => {
-    const drunkTemplatesElement = drunkTemplates.map((template) => {
-        return <li class="border rounded border-gray-500 p-2 flex flex-col text-center shrink-0" key={template.name}>
-            <span>{template.name}</span>
-            <span>{template.volume}ml</span>
-            <span>{template.alcohol}%</span>
-        </li>
-    })
-
     const initialStates: drunkRecordFormValues = {
         name: "",
         volumeMilliliter: 0,
@@ -69,6 +66,25 @@ export const DrunkRecordForm = component$<DrunkRecordFormProps>(({onSubmitRecord
         })
 
         states.reset()
+    })
+
+    const onSelectDrunkTemplate = $((template: drunkTemplateType) => {
+        states.name = template.name
+        states.volumeMilliliter = template.volume
+        states.alcoholByVolume = template.alcohol
+    })
+
+    const drunkTemplatesElement = drunkTemplates.map((template) => {
+        return <li class="border rounded border-gray-500 p-2 flex flex-col text-center shrink-0"
+                   key={template.name}
+                   onClick$={() => {
+                       onSelectDrunkTemplate(template)
+                   }}
+        >
+            <span>{template.name}</span>
+            <span>{template.volume}ml</span>
+            <span>{template.alcohol}%</span>
+        </li>
     })
 
     return (
