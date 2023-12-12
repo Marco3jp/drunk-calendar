@@ -29,8 +29,10 @@ export function useDrunkStore(): DrunkStore {
             this.setRecords = setR
         }
         pushRecords(records: Record[]): readonly Record[] {
-            this.setRecords([...this.records, ...records])
-            localStorage.setItem("drunk-records", JSON.stringify(this.records))
+            const newRecords = [...this.records, ...records]
+
+            this.setRecords(newRecords)
+            localStorage.setItem("drunk-records", JSON.stringify(newRecords))
             return this.records
         }
         queryRecords(query: Query): readonly Record[] {
