@@ -1,36 +1,33 @@
-name: deploy
+name: deploy project to GitHub Pages
+
 on:
   push:
     branches:
       - main
 
 jobs:
-  build:
-    runs-on: ubuntu-20.04
+  build-deploy:
+    runs-on: ubuntu-22.04
+
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
 
-      - name: Setup node 14.x
-        uses: actions/setup-node@v2
+      - name: Setup node ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
         with:
-          node-version: '14'
-
-      - name: Cache Node.js modules
-        uses: actions/cache@v2
-        with:
-          path: ~/.npm
-          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-node-
+          node-version: '20.10.0'
 
       - name: Install dependencies
         run: npm ci
 
       - name: Generate
-        run: npm run gh-pages:generate
+        run: npm run build
+
+      - name: Copy index.html for SPA
+        run: cp ./dist/index.html ./dist/404.html
 
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+          personal_token: ${{ secrets.PERSONAL_TOKEN }}
           publish_dir: ./dist
