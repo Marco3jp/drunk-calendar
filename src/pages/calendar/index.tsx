@@ -36,7 +36,8 @@ export default () => {
                                         return `${date.getHours()}:${date.getMinutes()}`
                                     })()}</div>
 
-                                <div className="text-sm w-40">{record.item.name}</div>
+                                <div className="text-sm flex-grow">{record.item.name}</div>
+                                {/* 1000mlとかなると多分デザインが意図とズレるので、ここはスタイルの組み方考えたほうが良い */}
                                 <div className="text-sm">{record.item.volumeMilliliter}ml</div>
                                 <div className="text-sm w-12 text-right">{record.item.alcoholByVolume}%</div>
                             </li>
