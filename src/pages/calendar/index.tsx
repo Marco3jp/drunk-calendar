@@ -22,16 +22,21 @@ export default () => {
             return acc + cur.item.alcoholByVolume * cur.item.volumeMilliliter / 100
         }, 0)
         return (
-            <li className="flex flex-col justify-between px-2 py-1 border-b border-gray-500" key={date}>
-                <span className="flex font-bold">
-                    <div className="text-sm">{date}</div>
-                    <div className="text-sm ml-6">Total: {totalAlcohol}ml</div>
-                </span>
+            <li className="flex flex-col justify-between px-2 py-4 border-b border-gray-400 border-dashed" key={date}>
+                <div className="flex font-bold">
+                    <span className="text-sm">{date}</span>
+                    <span className="text-sm ml-6">Total: {totalAlcohol}ml</span>
+                </div>
                 <ul>
                     {records.map((record) => {
                         return (
-                            <li className="flex py-1" key={record.date}>
-                                <div className="text-sm flex-1">{record.item.name}</div>
+                            <li className="flex mt-4" key={record.date}>
+                                <div className="text-sm w-12">{(() => {
+                                        const date = new Date(record.date * 1000)
+                                        return `${date.getHours()}:${date.getMinutes()}`
+                                    })()}</div>
+
+                                <div className="text-sm w-40">{record.item.name}</div>
                                 <div className="text-sm">{record.item.volumeMilliliter}ml</div>
                                 <div className="text-sm w-12 text-right">{record.item.alcoholByVolume}%</div>
                             </li>
