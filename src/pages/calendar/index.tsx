@@ -22,7 +22,7 @@ export default () => {
             return acc + cur.item.alcoholByVolume * cur.item.volumeMilliliter / 100
         }, 0)
         return (
-            <li className="flex flex-col justify-between px-2 py-1 border-b border-gray-500">
+            <li className="flex flex-col justify-between px-2 py-1 border-b border-gray-500" key={date}>
                 <span className="flex font-bold">
                     <div className="text-sm">{date}</div>
                     <div className="text-sm ml-6">Total: {totalAlcohol}ml</div>
@@ -30,7 +30,7 @@ export default () => {
                 <ul>
                     {records.map((record) => {
                         return (
-                            <li className="flex py-1">
+                            <li className="flex py-1" key={record.date}>
                                 <div className="text-sm flex-1">{record.item.name}</div>
                                 <div className="text-sm">{record.item.volumeMilliliter}ml</div>
                                 <div className="text-sm w-12 text-right">{record.item.alcoholByVolume}%</div>
