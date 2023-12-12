@@ -4,6 +4,7 @@
   "version": "0.0.0",
   "author": "Marco",
   "type": "module",
+  "homepage": "https://marco3jp.github.io/drunk-calendar/",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",

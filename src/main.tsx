@@ -25,7 +25,7 @@ const router = createBrowserRouter([
             }
         ],
     },
-]);
+], {basename: "/drunk-calendar/"});
 
 const root = document.querySelector("#root")
 
